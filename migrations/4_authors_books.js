@@ -5,13 +5,13 @@ exports.up = function(knex, Promise) {
       table.integer('author_id')
       .notNullable()
       .references('id')
-      .inTable('genres')
+      .inTable('authors')
       .onDelete('CASCADE')
       .index();
       table.integer('book_id')
       .notNullable()
       .references('id')
-      .inTable('genres')
+      .inTable('books')
       .onDelete('CASCADE')
       .index();
   })
