@@ -28,4 +28,15 @@ app.get('/genres', (req, res) => {
     });
 })
 
+app.get('/authors/', (req, res) => {
+  knex('authors').join('authors_books', 'authors_books.author_id', 'authors.id')
+  .join('books', 'books.id', 'authors_books.book_id')
+  .then((authors) => {
+    res.send(authors);
+  })  
+  .catch((err) => {
+    next(err);
+  });
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}! Yay SQL!`))
