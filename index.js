@@ -28,8 +28,9 @@ app.get('/genres', (req, res) => {
     });
 })
 
-app.get('/authors/', (req, res) => {
-  knex('authors').join('authors_books', 'authors_books.author_id', 'authors.id')
+app.get('/all/', (req, res) => {
+  knex.select('books.title','authors.name').from('authors')
+  .join('authors_books', 'authors_books.author_id', 'authors.id')
   .join('books', 'books.id', 'authors_books.book_id')
   .then((authors) => {
     res.send(authors);
